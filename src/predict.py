@@ -41,7 +41,7 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description="Pass multiple keyword arguments for prediction")
 
-    parser.add_argument("--model_path", required=True, type=str, help="Path to the model")
+    parser.add_argument("--model_path", required=False, default="./yolo/runs/segment/train11/weights/best.pt", type=str, help="Path to the model")
     parser.add_argument("--image_path", required=True,type=int, help="Path to image")
 
     # Parsing arguments and converting to dictionary
