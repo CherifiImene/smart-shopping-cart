@@ -1,2 +1,8 @@
 opencv-python-headless
 ipykernel
+thop
+matplotlib
+torch
+ultralytics
+seaborn
+pandas

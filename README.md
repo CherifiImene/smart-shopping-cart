@@ -1,60 +1,125 @@
-# Smart Shopping Cart
-## Overview
+# 🛒 Smart Shopping Cart
 
-The **Smart Shopping Cart** is  an automatic self checkout system for the automatic segmentation/detection of products in a shopping cart, basket, or checkout counter. 
+Smart Shopping Cart is a deep learning project that fine-tunes YOLO on a sample set from the MVTec D2S Dataset to perform instance segmentation on market products. This repository provides Jupyter notebooks for data exploration, preprocessing, training, and evaluation, along with scripts for training and inference.
 
-## Features
+## 📌 Features
 
-- By recognizing individual items from an image or video stream, the system can:
+- Fine-tuned YOLO model for instance segmentation of market products.
 
-- Identify each product without needing bar codes.
-- Speed up the checkout process using AI-powered image recognition.
-- Reduce manual errors in product detection and pricing.
-- Improve self-checkout efficiency in stores.
+- **Notebooks** for:
 
-## How It Works
+    - Data exploration & analysis 📊
 
-1. Camera captures an image of products on a conveyor belt or in a shopping cart.
-2. Instance segmentation model separates each product from the background.
-3. Recognition module identifies the segmented products using a trained classifier.
-4. Total price is calculated, and the customer can pay instantly without manual scanning.
+    - Data preprocessing 🛠️
 
-## Dependencies
+    - Model training 🎯
 
-This application depends on the following Python packages:
+    - Model evaluation 📈
 
-- `opencv-python`: Used for handling video streams, drawing bounding boxes, and displaying results.
-- `numpy`: Used for numerical computations, including Kalman filter operations.
-- `scipy`: Used for calculating distances between tracked objects and detections.
-- `matplotlib`: Used for plotting the estimated variables
-- `ultralytics`: Used for detecting the objects using yolo11. 
+- **Scripts** for:
 
-To install the required dependencies, run:
+    - Training the model 🏋️
 
-```bash
-# create a virtual environment
-python -m venv .tracker
-# install dependencies
+    - Running inference on a single image or a folder of images 🖼️
+
+- Support for GPU acceleration (e.g., Google Colab, local GPU setups).
+
+## 📂 Repository Structure
+
+````
+📦 smart-shopping-cart
+├── notebooks/               # Jupyter notebooks for different stages of the pipeline
+│   ├── data_exploration.ipynb
+│   ├── data_preprocessing.ipynb
+│   ├── train.ipynb          # Notebook for training yolov8n-seg
+│   ├── train_yolo11n.ipynb  # Notebook for training yolo11-seg 
+│    ├── evaluation.ipynb
+├── scripts/                 # Python scripts for automation
+│   ├── train.py             # Train YOLO model
+│   ├── predict.py           # Run inference on images
+├── yolo/                
+│    ├── datasets/           # MVTec D2S dataset sample in yolo format
+│    │    ├── images/
+│    │    ├── labels/
+│    │    ├── data.yaml
+│    ├── runs/
+│        ├── segments/       # History of training yolo models 
+                             # and saved best checkpoints
+
+├── README.md                # Project documentation
+├── requirements.txt         # Required dependencies
+````
+## 🔧 Installation
+
+1️⃣ Clone the repository
+
+````
+git clone https://github.com/yourusername/smart-shopping-cart.git
+cd smart-shopping-cart
+````
+
+2️⃣ Install dependencies
+
+It's recommended to use a virtual environment:
+
+````python3 -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+
 pip install -r requirements.txt
 ````
 
-## Running the app
-```bash
-# show all possible options
-python track.py --help
+## 🏋️ Training the Model
 
-python track.py --mode single --video-source 0
+To train YOLO on the dataset, run:
+
+````
+python scripts/train.py --epochs 200 --img-size 640
 ````
 
-## System Design
-![ System Design](https://github.com/CherifiImene/kalman-object-tracker/blob/main/docs/system_design.png)
+## 🔍 Running Inference
 
+Single Image Prediction
 
-## Justification of choices made
+````
+python scripts/predict.py --image_path path/to/image.jpg
+````
 
-### Model : YOLO11s
-- Light-weight and fast
-- Can be used for real-time applications like object tracking
-### Dataset
-- Provides pre-trained yolo models with the possibility to deploy them to multiple platform.
-- YOLO exported on ONNx format gives x3 speed in cpu.
+Batch Prediction (Folder of Images)
+
+````
+python scripts/predict.py --image_path path/to/images/
+````
+
+## 📊 Model Evaluation
+
+After training, use the evaluation notebook to assess performance:
+
+Box & Segmentation Precision/Recall
+
+mAP50 and mAP50-95 scores
+
+Confusion matrix & loss curves
+
+## 📦 Dataset
+
+We use a subset of the MVTec D2S Dataset, a dataset for instance segmentation in retail environments.
+
+Go to  **notebooks/data_exploration.ipynb** for instructions on how to install the dataset 
+
+## 🚀 Future Improvements
+
+🔄 Support for additional market product datasets
+
+📱 Deploy the model for real-time mobile applications
+
+⏳ Optimize inference speed on edge devices
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests.
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+💡 If you find this project useful, give it a ⭐ on GitHub!
