@@ -19,9 +19,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Passes yolo train arguments")
 
     # Define expected arguments
-    parser.add_argument("--model_name", type=str, help="Yolo path or model name")
-    parser.add_argument("--data_yaml", type=str, help="Path to data.yaml file")
-    parser.add_argument("--device", type=str, help="Device where to train the model")
+    parser.add_argument("--model_name", default="yolo11s-seg", type=str, help="Yolo path or model name")
+    parser.add_argument("--data_yaml", required=True, type=str, help="Path to data.yaml file")
+    parser.add_argument("--device", default="cpu", type=str, help="Device where to train the model")
 
     # Parse known arguments
     args, unknown = parser.parse_known_args()

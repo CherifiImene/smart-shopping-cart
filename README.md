@@ -73,7 +73,7 @@ pip install -r requirements.txt
 To train YOLO on the dataset, run:
 
 ````
-python scripts/train.py --epochs 200 --img-size 640
+python scripts/train.py --data "yolo/datasets/data.yaml" --epochs 200 --imgsz 640
 ````
 
 ## 🔍 Running Inference
